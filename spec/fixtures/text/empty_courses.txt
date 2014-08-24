@@ -1,0 +1,11 @@
+LOG750       INFOGRAPHIE                                                                                  MAT472
+             01    Mar       18:00 - 21:30   C           A-2448               L. Thériault
+                   Jeu       18:00 - 20:00   Labo        A-3322
+
+
+LOG791       PROJETS SPÉCIAUX                                                                             Autorisation du directeur de département
+                                             Projet
+
+
+LOG792       PROJET DE FIN D'ÉTUDES EN GÉNIE LOGICIEL                                                     PCL310
+                                             Projet

@@ -1,0 +1,18 @@
+ÉCOLE DE TECHNOLOGIE SUPÉRIEURE
+Bureau des services académiques
+                                                                                               Baccalauréat en génie LOGICIEL
+
+
+                                             HORAIRE AUTOMNE 2013
+                                                 Locaux A: bâtiment sud, 1100, Notre-Dame O.
+                                                 Locaux B: bâtiment nord, 1111, Notre-Dame O.
+   Sauf mention particulière de la part de l'enseignant lors de sa première séance de cours, les travaux pratiques et les laboratoires commencent la
+                             deuxième semaine du trimestre à condition qu'une séance de cours ait préalablement eu lieu.
+
+
+COURS        GR    JOUR        HEURE         ACTIVITÉ    LOCAL                ENSEIGNANT                                  PRÉALABLES
+
+
+ANG010       ANGLAIS POUR INGÉNIEURS I
+             01    Lun       18:00 - 21:30   C           B-1516               R. Hailpern
+                   Ven       18:00 - 20:00   TP          B-1514

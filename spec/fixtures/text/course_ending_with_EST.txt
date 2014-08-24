@@ -1,0 +1,5 @@
+MATEST       ALGÈBRE LINÉAIRE ET GÉOMÉTRIE DE L'ESPACE                                                    MAT145
+             01    Ven       13:30 - 17:00   C           B-1708               P. Choquette
+                   Mar       13:30 - 16:30   TP          B-1516
+             02    Mer       09:00 - 12:30   C           B-1716               E.M. Frih
+                   Lun       09:00 - 12:00   TP          B-1506

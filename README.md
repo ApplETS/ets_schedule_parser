@@ -1,0 +1,2 @@
+[![Build Status](https://travis-ci.org/Krystosterone/ets_schedule_parser.svg?branch=master)](https://travis-ci.org/Krystosterone/ets_schedule_parser)
+[![Coverage Status](https://coveralls.io/repos/Krystosterone/ets_schedule_parser/badge.png?branch=master)](https://coveralls.io/r/Krystosterone/ets_schedule_parser?branch=master)
