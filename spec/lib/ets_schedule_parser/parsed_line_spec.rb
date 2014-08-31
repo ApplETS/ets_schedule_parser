@@ -36,14 +36,14 @@ describe EtsScheduleParser::ParsedLine do
           expect(subject).to be_course
         end
 
-        specify { expect(subject.course_name).to eq(course_name) }
+        specify { expect(subject.course.name).to eq(course_name) }
 
         context "when comparing to another course name" do
-          specify { expect(subject.course_named?("potato")).to eq(false) }
+          specify { expect(subject.course.named?("potato")).to eq(false) }
         end
 
         context "when comparing to the same course name" do
-          specify { expect(subject.course_named?(course_name)).to eq(true) }
+          specify { expect(subject.course.named?(course_name)).to eq(true) }
         end
       end
     end
@@ -51,12 +51,12 @@ describe EtsScheduleParser::ParsedLine do
 
   context "when a line that is represented as a group" do
     {
-      "             02    Lun       18:00 - 21:30   C           A-3336               M. Brouillette" => {nb: 2, attributes: ["Lun", "18:00", "21:30", "C"]},
-      "             01    Jeu       13:30 - 17:00   TP          A-1350               L.Trudeau" => {nb: 1, attributes: ["Jeu", "13:30", "17:00", "TP"]},
-      "             15    Mar       09:00 - 12:30   TP A+B      B-0908               P. Choquette" => {nb: 15, attributes: ["Mar", "09:00", "12:30", "TP A+B"]},
-      "             01    Ven       08:45 - 12:15   TP-Labo A   B-3402               C. Talhi" => {nb: 1, attributes: ["Ven", "08:45", "12:15", "TP-Labo A"]},
-      "             01    Mer       18:00 - 20:00   TP/Labo     A-3322               F. Robert" => {nb: 1, attributes: ["Mer", "18:00", "20:00", "TP/Labo"]}
-    }.each do |line, group|
+      "             02    Lun       18:00 - 21:30   C           A-3336               M. Brouillette" => ["02", "Lun", "18:00", "21:30", "C"],
+      "             01    Jeu       13:30 - 17:00   TP          A-1350               L.Trudeau" => ["01", "Jeu", "13:30", "17:00", "TP"],
+      "             15    Mar       09:00 - 12:30   TP A+B      B-0908               P. Choquette" => ["15", "Mar", "09:00", "12:30", "TP A+B"],
+      "             01    Ven       08:45 - 12:15   TP-Labo A   B-3402               C. Talhi" => ["01", "Ven", "08:45", "12:15", "TP-Labo A"],
+      "             01    Mer       18:00 - 20:00   TP/Labo     A-3322               F. Robert" => ["01", "Mer", "18:00", "20:00", "TP/Labo"]
+    }.each do |line, attributes|
       context "when the line '#{line}' is passed" do
         subject { EtsScheduleParser::ParsedLine.new(line) }
 
@@ -64,8 +64,11 @@ describe EtsScheduleParser::ParsedLine do
           expect(subject).to be_group
         end
 
-        specify { expect(subject.group_nb).to eq(group[:nb]) }
-        specify { expect(subject.group_attributes).to eq(group[:attributes]) }
+        specify { expect(subject.group.nb).to eq(attributes[0]) }
+        specify { expect(subject.group.weekday).to eq(attributes[1]) }
+        specify { expect(subject.group.start_time).to eq(attributes[2]) }
+        specify { expect(subject.group.end_time).to eq(attributes[3]) }
+        specify { expect(subject.group.type).to eq(attributes[4]) }
       end
     end
   end
@@ -77,7 +80,7 @@ describe EtsScheduleParser::ParsedLine do
         "                   Mar       09:00 - 12:30   TP A+B      B-0908" => ["Mar", "09:00", "12:30", "TP A+B"],
         "                   Ven       08:45 - 12:15   TP-Labo A   B-3402" => ["Ven", "08:45", "12:15", "TP-Labo A"],
         "                   Mer       18:00 - 20:00   TP/Labo     A-3322" => ["Mer", "18:00", "20:00", "TP/Labo"]
-    }.each do |line, period_attributes|
+    }.each do |line, attributes|
       context "when the line '#{line}' is passed" do
         subject { EtsScheduleParser::ParsedLine.new(line) }
 
@@ -85,7 +88,10 @@ describe EtsScheduleParser::ParsedLine do
           expect(subject).to be_period
         end
 
-        specify { expect(subject.period_attributes).to eq(period_attributes) }
+        specify { expect(subject.period.weekday).to eq(attributes[0]) }
+        specify { expect(subject.period.start_time).to eq(attributes[1]) }
+        specify { expect(subject.period.end_time).to eq(attributes[2]) }
+        specify { expect(subject.period.type).to eq(attributes[3]) }
       end
     end
   end
