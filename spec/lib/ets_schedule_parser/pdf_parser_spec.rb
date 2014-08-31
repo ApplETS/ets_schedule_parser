@@ -1,16 +1,25 @@
 require 'spec_helper'
 
 describe EtsScheduleParser::PdfParser do
-  context 'when parsing a pdf from a path' do
-    let(:stream) { double('pdf_stream') }
-    let(:parsed_structs) { [double('struct')] }
+  context 'when parsing a schedule pdf' do
+    let(:stream) { double('IO stream') }
+    let(:first_parsed_line) { double(EtsScheduleParser::ParsedLine) }
+    let(:second_parsed_line) { double(EtsScheduleParser::ParsedLine) }
 
-    it "should convert to pdf to text then parse it" do
+    before(:each) do
       allow(EtsScheduleParser::PdfStream).to receive(:from_file).with('a_pdf_path').and_return stream
-      allow(EtsScheduleParser::StreamParser).to receive(:parse).with(stream, %w(SOME IGNORED COURSES)).and_return({parsed: :content})
-      allow(EtsScheduleParser::RecursiveStruct).to receive(:build).with({parsed: :content}).and_return(parsed_structs)
 
-      expect(EtsScheduleParser::PdfParser.parse('a_pdf_path', %w(SOME IGNORED COURSES))).to eq(parsed_structs)
+      allow(stream).to receive(:each).and_yield('first line').and_yield('second line')
+      allow(EtsScheduleParser::ParsedLine).to receive(:new).with('first line').and_return first_parsed_line
+      allow(EtsScheduleParser::ParsedLine).to receive(:new).with('second line').and_return second_parsed_line
+    end
+
+    it 'should yield a parsed line for every line in the pdf and then close the stream' do
+      expect(stream).to receive(:close)
+
+      expect{ |b|
+        EtsScheduleParser::PdfParser.parse('a_pdf_path', &b)
+      }.to yield_successive_args(first_parsed_line, second_parsed_line)
     end
   end
 end

@@ -1,9 +1,9 @@
 module EtsScheduleParser
   class PdfParser
-    def self.parse(path, ignored_course_names = [])
+    def self.parse(path)
       stream = EtsScheduleParser::PdfStream.from_file(path)
-      hash = EtsScheduleParser::StreamParser.parse(stream, ignored_course_names)
-      EtsScheduleParser::RecursiveStruct.build(hash)
+      stream.each { |line| yield EtsScheduleParser::ParsedLine.new(line) }
+      stream.close
     end
   end
 end
