@@ -1,6 +1,6 @@
 module EtsScheduleParser
   class ParsedLine
-    class BaseParsedLine
+    class Base
       def initialize(line)
         @match_data = match_pattern.match(line)
       end

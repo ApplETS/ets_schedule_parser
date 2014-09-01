@@ -1,6 +1,8 @@
 require 'coveralls'
 require 'ets_schedule_parser'
 
+Dir[File.expand_path("../support/**/*.rb", __FILE__)].each { |f| require f }
+
 Coveralls.wear!
 
 def pdf_fixture_path(name)
@@ -13,8 +15,4 @@ end
 
 def text_fixture(name)
   File.open(text_fixture_path(name), "r").read
-end
-
-def stream_text_fixture(name)
-  StringIO.new(text_fixture(name))
 end
