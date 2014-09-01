@@ -3,9 +3,9 @@ module EtsScheduleParser
     attr_reader :course, :group, :period
 
     def initialize(line)
-      @course = CourseParsedLine.new(line)
-      @group = GroupParsedLine.new(line)
-      @period = PeriodParsedLine.new(line)
+      @course = Course.new(line)
+      @group = Group.new(line)
+      @period = Period.new(line)
     end
 
     def course?
